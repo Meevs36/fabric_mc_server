@@ -1,0 +1,34 @@
+# Author -- meevs
+# Creation Date -- 2023-11-02
+# File Name -- compose.yaml
+# Notes --
+
+version: "2.4"
+services:
+  latest:
+    image: "fabric_mc-${MC_VERSION}-img"
+    container_name: "fabric_mc-${MC_VERSION}"
+    build:
+      args:
+        INSTALL_DIR: "${INSTALL_DIR}"
+        JAVA_VERSION: "${JAVA_VERSION}"
+        MC_VERSION: "${MC_VERSION}"
+        MC_EULA: "${MC_EULA}"
+        FABRIC_LOADER_VERSION: "${FABRIC_LOADER_VERSION}"
+        FABRIC_INSTALLER_VERSION: "${FABRIC_INSTALLER_VERSION}"
+        SERVER_CONFIG: "${SERVER_CONFIG}"
+        MIN_RAM: "${MIN_RAM}"
+        MAX_RAM: "${MAX_RAM}"
+    stdin_open: true
+    tty: true
+    ports:
+      - "24454:24454/udp" # For voice chat mod
+      - "25565:25565/tcp"
+      - "25565:25565/udp"
+    volumes:
+      - type: "volume"
+        source: "data"
+        target: "/home/fabric/server"
+
+volumes:
+  data: {}
